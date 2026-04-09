@@ -5,7 +5,14 @@ import { generateTicketNumber } from "../utils/generateTicketNumber.js";
 
 export const bookFlight = async (req, res) => {
   try {
-    const { flightId, seatNumber, travelDate } = req.body;
+    const {
+      flightId,
+      seatNumber,
+      travelDate,
+      passengerName,
+      passengerGender,
+      passengerAge,
+    } = req.body;
 
     const flight = await Flight.findById(flightId);
 
@@ -34,6 +41,9 @@ export const bookFlight = async (req, res) => {
       userId: req.user._id,
       flightId,
       seatNumber,
+      passengerName,
+      passengerGender,
+      passengerAge,
     });
 
     const ticketNumber = generateTicketNumber();
