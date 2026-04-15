@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
+import { jsPDF } from "jspdf";
 import Loader from "../components/Loader.jsx";
 import API from "../services/api.js";
 
@@ -46,7 +46,11 @@ const MyBookings = () => {
     if (!element) return;
 
     try {
-      const canvas = await html2canvas(element, { scale: 2 });
+      const canvas = await html2canvas(element, { 
+        scale: 2,
+        useCORS: true,
+        allowTaint: true
+      });
       const imgData = canvas.toDataURL("image/png");
       const pdf = new jsPDF("p", "mm", "a4");
 
@@ -57,7 +61,8 @@ const MyBookings = () => {
       pdf.save(`Ticket-${bookingId}.pdf`);
       toast.success("Ticket downloaded successfully!");
     } catch (err) {
-      toast.error("Failed to generate PDF");
+      console.error("PDF generation error:", err);
+      toast.error(`Failed to generate PDF: ${err.message || err.toString()}`);
     }
   };
 
