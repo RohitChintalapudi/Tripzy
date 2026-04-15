@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import html2canvas from "html2canvas";
+import domtoimage from "dom-to-image";
 import { jsPDF } from "jspdf";
 import Loader from "../components/Loader.jsx";
 import API from "../services/api.js";
@@ -46,16 +46,23 @@ const MyBookings = () => {
     if (!element) return;
 
     try {
-      const canvas = await html2canvas(element, { 
-        scale: 2,
-        useCORS: true,
-        allowTaint: true
-      });
-      const imgData = canvas.toDataURL("image/png");
-      const pdf = new jsPDF("p", "mm", "a4");
+      const filter = (node) => {
+        return node.getAttribute ? node.getAttribute("data-html2canvas-ignore") !== "true" : true;
+      };
 
+      const imgData = await domtoimage.toPng(element, { 
+        quality: 1, 
+        bgcolor: '#ffffff',
+        filter: filter
+      });
+      
+      const img = new Image();
+      img.src = imgData;
+      await new Promise((resolve) => { img.onload = resolve; });
+
+      const pdf = new jsPDF("p", "mm", "a4");
       const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+      const pdfHeight = (img.height * pdfWidth) / img.width;
 
       pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
       pdf.save(`Ticket-${bookingId}.pdf`);
