@@ -38,15 +38,15 @@ const AdminDashboard = () => {
 
   return (
     <section className="space-y-5">
-      <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+      <div className="flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-900/80 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:p-5">
         <div>
-          <h1 className="text-2xl font-semibold text-slate-900">Admin Dashboard</h1>
-          <p className="text-sm text-slate-600">Manage flights and schedule updates.</p>
+          <h1 className="text-xl font-semibold text-slate-900 dark:text-slate-100 sm:text-2xl">Admin Dashboard</h1>
+          <p className="text-sm text-slate-600 dark:text-slate-400">Manage flights and schedule updates.</p>
         </div>
         <button
           type="button"
           onClick={() => navigate("/admin/add-flight")}
-          className="rounded-md bg-green-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-green-700"
+          className="w-full rounded-md bg-green-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-green-700 sm:w-auto"
         >
           Add Flight
         </button>
@@ -55,7 +55,7 @@ const AdminDashboard = () => {
       {loading ? (
         <Loader />
       ) : flights.length === 0 ? (
-        <p className="rounded-xl border border-slate-200 bg-white p-6 text-center text-slate-600">
+        <p className="rounded-xl border border-slate-200 bg-white p-6 text-center text-slate-600 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-300">
           No flights available.
         </p>
       ) : (

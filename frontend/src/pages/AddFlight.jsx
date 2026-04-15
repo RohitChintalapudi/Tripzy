@@ -42,8 +42,8 @@ const AddFlight = () => {
   };
 
   return (
-    <section className="mx-auto max-w-3xl rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-      <h1 className="text-2xl font-semibold text-slate-900">Add New Flight</h1>
+    <section className="mx-auto max-w-3xl rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-900/80 sm:p-6">
+      <h1 className="text-xl font-semibold text-slate-900 dark:text-slate-100 sm:text-2xl">Add New Flight</h1>
       <form className="mt-6 grid gap-4 md:grid-cols-2" onSubmit={onSubmit}>
         <input
           type="text"
@@ -52,7 +52,7 @@ const AddFlight = () => {
           value={formData.airlineName}
           onChange={onChange}
           required
-          className="rounded-md border border-slate-300 px-4 py-2 outline-none focus:border-blue-500"
+          className="input-tripzy"
         />
         <input
           type="text"
@@ -61,7 +61,7 @@ const AddFlight = () => {
           value={formData.source}
           onChange={onChange}
           required
-          className="rounded-md border border-slate-300 px-4 py-2 outline-none focus:border-blue-500"
+          className="input-tripzy"
         />
         <input
           type="text"
@@ -70,7 +70,7 @@ const AddFlight = () => {
           value={formData.destination}
           onChange={onChange}
           required
-          className="rounded-md border border-slate-300 px-4 py-2 outline-none focus:border-blue-500"
+          className="input-tripzy"
         />
         <input
           type="datetime-local"
@@ -78,7 +78,7 @@ const AddFlight = () => {
           value={formData.departureTime}
           onChange={onChange}
           required
-          className="rounded-md border border-slate-300 px-4 py-2 outline-none focus:border-blue-500"
+          className="input-tripzy"
         />
         <input
           type="datetime-local"
@@ -86,7 +86,7 @@ const AddFlight = () => {
           value={formData.arrivalTime}
           onChange={onChange}
           required
-          className="rounded-md border border-slate-300 px-4 py-2 outline-none focus:border-blue-500"
+          className="input-tripzy"
         />
         <input
           type="number"
@@ -96,7 +96,7 @@ const AddFlight = () => {
           value={formData.price}
           onChange={onChange}
           required
-          className="rounded-md border border-slate-300 px-4 py-2 outline-none focus:border-blue-500"
+          className="input-tripzy"
         />
         <input
           type="number"
@@ -106,7 +106,7 @@ const AddFlight = () => {
           value={formData.seatsAvailable}
           onChange={onChange}
           required
-          className="rounded-md border border-slate-300 px-4 py-2 outline-none focus:border-blue-500"
+          className="input-tripzy"
         />
         <div className="md:col-span-2">
           <button

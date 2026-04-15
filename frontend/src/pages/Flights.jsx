@@ -99,7 +99,7 @@ const Flights = () => {
 
   return (
     <section className="space-y-5">
-      <div className="relative overflow-hidden rounded-3xl px-6 py-8 text-white shadow-xl fx-fade-up">
+      <div className="relative overflow-hidden rounded-3xl px-4 py-6 text-white shadow-xl fx-fade-up sm:px-6 sm:py-8">
         <img
           src="https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1600&q=80"
           alt="Aircraft above clouds"
@@ -115,33 +115,33 @@ const Flights = () => {
       </div>
 
       <form
-        className="grid gap-3 rounded-3xl border border-slate-200 bg-white p-4 font-bold shadow-lg sm:grid-cols-2 lg:grid-cols-4"
+        className="grid gap-3 rounded-3xl border border-slate-200 bg-white p-4 font-bold shadow-lg dark:border-slate-700 dark:bg-slate-900/80 sm:grid-cols-2 lg:grid-cols-4"
         onSubmit={onSearch}
       >
         <label className="space-y-1">
-          <span className="text-xs font-medium text-slate-600">Source</span>
+          <span className="text-xs font-medium text-slate-600 dark:text-slate-400">Source</span>
           <input
             type="text"
             name="source"
             placeholder="Source"
             value={filters.source}
             onChange={onFilterChange}
-            className="w-full rounded-md border border-slate-300 px-3 py-2 outline-none focus:border-blue-500"
+            className="input-tripzy px-3 py-2"
           />
         </label>
         <label className="space-y-1">
-          <span className="text-xs font-medium text-slate-600">Destination</span>
+          <span className="text-xs font-medium text-slate-600 dark:text-slate-400">Destination</span>
           <input
             type="text"
             name="destination"
             placeholder="Destination"
             value={filters.destination}
             onChange={onFilterChange}
-            className="w-full rounded-md border border-slate-300 px-3 py-2 outline-none focus:border-blue-500"
+            className="input-tripzy px-3 py-2"
           />
         </label>
         <label className="space-y-1">
-          <span className="text-xs font-medium text-slate-600">
+          <span className="text-xs font-medium text-slate-600 dark:text-slate-400">
             Departure Date (optional)
           </span>
           <input
@@ -149,9 +149,9 @@ const Flights = () => {
             name="date"
             value={filters.date}
             onChange={onFilterChange}
-            className="w-full rounded-md border border-slate-300 px-3 py-2 outline-none focus:border-blue-500"
+            className="input-tripzy px-3 py-2"
           />
-          <span className="text-xs text-slate-500">
+          <span className="text-xs text-slate-500 dark:text-slate-400">
             {filters.date
               ? `Selected: ${formatToDDMMYYYY(filters.date)} (dd/mm/yyyy)`
               : "Format shown to users: dd/mm/yyyy"}
@@ -160,7 +160,7 @@ const Flights = () => {
         <div className="flex items-end">
           <button
             type="submit"
-            className="w-full rounded-xl bg-blue-600 px-4 py-3 font-semibold text-white shadow transition hover:bg-blue-700"
+            className="w-full rounded-xl bg-blue-600 px-4 py-3 text-sm font-semibold text-white shadow transition hover:bg-blue-700 sm:text-base dark:bg-sky-600 dark:hover:bg-sky-500"
           >
             Search
           </button>
@@ -170,24 +170,24 @@ const Flights = () => {
       {loading ? (
         <Loader />
       ) : flights.length === 0 ? (
-        <p className="rounded-lg border border-slate-200 bg-white p-6 text-center text-slate-600">
+        <p className="rounded-lg border border-slate-200 bg-white p-6 text-center text-slate-600 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-300">
           No flights found.
         </p>
       ) : (
-        <div className="grid gap-4 lg:grid-cols-[280px_1fr]">
-          <aside className="h-fit rounded-2xl border border-slate-200 bg-white p-4 font-bold shadow-sm">
-            <h2 className="text-lg font-semibold text-slate-900">Sort & Filter</h2>
-            <p className="mt-1 text-xs text-slate-500">
+        <div className="grid gap-4 lg:grid-cols-[minmax(0,280px)_1fr]">
+          <aside className="h-fit rounded-2xl border border-slate-200 bg-white p-4 font-bold shadow-sm dark:border-slate-700 dark:bg-slate-900/80">
+            <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-100">Sort & Filter</h2>
+            <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
               Refine your results for better options.
             </p>
 
             <div className="mt-4 space-y-4">
               <label className="block">
-                <span className="text-xs font-medium text-slate-600">Sort By</span>
+                <span className="text-xs font-medium text-slate-600 dark:text-slate-400">Sort By</span>
                 <select
                   value={sortBy}
                   onChange={(event) => setSortBy(event.target.value)}
-                  className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm outline-none focus:border-blue-500"
+                  className="input-tripzy mt-1 px-3 py-2 text-sm"
                 >
                   <option value="recommended">Recommended</option>
                   <option value="price-low">Price: Low to High</option>
@@ -197,7 +197,7 @@ const Flights = () => {
               </label>
 
               <div>
-                <p className="text-xs font-medium text-slate-600">
+                <p className="text-xs font-medium text-slate-600 dark:text-slate-400">
                   Max Price: ₹{priceLimit}
                 </p>
                 <input
@@ -212,26 +212,26 @@ const Flights = () => {
               </div>
 
               <div>
-                <p className="text-xs font-medium text-slate-600">Quick Price Range</p>
+                <p className="text-xs font-medium text-slate-600 dark:text-slate-400">Quick Price Range</p>
                 <div className="mt-2 flex flex-wrap gap-2">
                   <button
                     type="button"
                     onClick={() => setPriceBand("all")}
                     className={`rounded-full px-3 py-1 text-xs font-medium ${
                       priceBand === "all"
-                        ? "bg-blue-600 text-white"
-                        : "bg-slate-100 text-slate-700"
+                        ? "bg-blue-600 text-white dark:bg-sky-600"
+                        : "bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-200"
                     }`}
                   >
                     All
                   </button>
                   <button
                     type="button"
-                    onClick={() => setPriceBand("under-300")}
+                    onClick={() => setPriceBand("under-10000")}
                     className={`rounded-full px-3 py-1 text-xs font-medium ${
                       priceBand === "under-10000"
-                        ? "bg-blue-600 text-white"
-                        : "bg-slate-100 text-slate-700"
+                        ? "bg-blue-600 text-white dark:bg-sky-600"
+                        : "bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-200"
                     }`}
                   >
                     &lt;10000
@@ -241,8 +241,8 @@ const Flights = () => {
                     onClick={() => setPriceBand("10000-20000")}
                     className={`rounded-full px-3 py-1 text-xs font-medium ${
                       priceBand === "10000-20000"
-                        ? "bg-blue-600 text-white"
-                        : "bg-slate-100 text-slate-700"
+                        ? "bg-blue-600 text-white dark:bg-sky-600"
+                        : "bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-200"
                     }`}
                   >
                     10000-20000
@@ -252,8 +252,8 @@ const Flights = () => {
                     onClick={() => setPriceBand("20000-plus")}
                     className={`rounded-full px-3 py-1 text-xs font-medium ${
                       priceBand === "20000-plus"
-                        ? "bg-blue-600 text-white"
-                        : "bg-slate-100 text-slate-700"
+                        ? "bg-blue-600 text-white dark:bg-sky-600"
+                        : "bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-200"
                     }`}
                   >
                     &gt;20000
@@ -263,12 +263,12 @@ const Flights = () => {
             </div>
           </aside>
 
-          <div className="space-y-3">
-            <p className="text-sm font-medium text-slate-600">
+          <div className="min-w-0 space-y-3">
+            <p className="text-sm font-medium text-slate-600 dark:text-slate-400">
               Showing {filteredFlights.length} of {flights.length} flights
             </p>
             {filteredFlights.length === 0 ? (
-              <p className="rounded-lg border border-slate-200 bg-white p-6 text-center text-slate-600">
+              <p className="rounded-lg border border-slate-200 bg-white p-6 text-center text-slate-600 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-300">
                 No flights match your selected filters.
               </p>
             ) : (

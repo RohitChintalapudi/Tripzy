@@ -82,8 +82,8 @@ const EditFlight = () => {
   }
 
   return (
-    <section className="mx-auto max-w-3xl rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-      <h1 className="text-2xl font-semibold text-slate-900">Edit Flight</h1>
+    <section className="mx-auto max-w-3xl rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-900/80 sm:p-6">
+      <h1 className="text-xl font-semibold text-slate-900 dark:text-slate-100 sm:text-2xl">Edit Flight</h1>
       <form className="mt-6 grid gap-4 md:grid-cols-2" onSubmit={onSubmit}>
         <input
           type="text"
@@ -92,7 +92,7 @@ const EditFlight = () => {
           value={formData.airlineName}
           onChange={onChange}
           required
-          className="rounded-md border border-slate-300 px-4 py-2 outline-none focus:border-blue-500"
+          className="input-tripzy"
         />
         <input
           type="text"
@@ -101,7 +101,7 @@ const EditFlight = () => {
           value={formData.source}
           onChange={onChange}
           required
-          className="rounded-md border border-slate-300 px-4 py-2 outline-none focus:border-blue-500"
+          className="input-tripzy"
         />
         <input
           type="text"
@@ -110,7 +110,7 @@ const EditFlight = () => {
           value={formData.destination}
           onChange={onChange}
           required
-          className="rounded-md border border-slate-300 px-4 py-2 outline-none focus:border-blue-500"
+          className="input-tripzy"
         />
         <input
           type="datetime-local"
@@ -118,7 +118,7 @@ const EditFlight = () => {
           value={formData.departureTime}
           onChange={onChange}
           required
-          className="rounded-md border border-slate-300 px-4 py-2 outline-none focus:border-blue-500"
+          className="input-tripzy"
         />
         <input
           type="datetime-local"
@@ -126,7 +126,7 @@ const EditFlight = () => {
           value={formData.arrivalTime}
           onChange={onChange}
           required
-          className="rounded-md border border-slate-300 px-4 py-2 outline-none focus:border-blue-500"
+          className="input-tripzy"
         />
         <input
           type="number"
@@ -136,7 +136,7 @@ const EditFlight = () => {
           value={formData.price}
           onChange={onChange}
           required
-          className="rounded-md border border-slate-300 px-4 py-2 outline-none focus:border-blue-500"
+          className="input-tripzy"
         />
         <input
           type="number"
@@ -146,13 +146,13 @@ const EditFlight = () => {
           value={formData.seatsAvailable}
           onChange={onChange}
           required
-          className="rounded-md border border-slate-300 px-4 py-2 outline-none focus:border-blue-500"
+          className="input-tripzy"
         />
         <div className="md:col-span-2">
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full rounded-md bg-blue-600 px-4 py-2 font-medium text-white transition hover:bg-blue-700 disabled:opacity-70"
+            className="w-full rounded-md bg-blue-600 px-4 py-2 font-medium text-white transition hover:bg-blue-700 disabled:opacity-70 dark:bg-sky-600 dark:hover:bg-sky-500"
           >
             {isSubmitting ? "Updating..." : "Update Flight"}
           </button>

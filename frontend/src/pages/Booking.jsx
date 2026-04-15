@@ -101,11 +101,11 @@ const Booking = () => {
 
   return (
     <section className="mx-auto grid max-w-5xl gap-6 lg:grid-cols-3">
-      <div className="lg:col-span-2 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h1 className="text-2xl font-semibold text-slate-900">Book Your Flight</h1>
+      <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-900/80 sm:p-6 lg:col-span-2">
+        <h1 className="text-xl font-semibold text-slate-900 dark:text-slate-100 sm:text-2xl">Book Your Flight</h1>
 
         {!flightId && (
-          <p className="mt-3 rounded-md bg-amber-50 p-3 text-sm text-amber-700">
+          <p className="mt-3 rounded-md bg-amber-50 p-3 text-sm text-amber-800 dark:bg-amber-950/50 dark:text-amber-200">
             No flight selected. Please go to flights and select one to continue.
           </p>
         )}
@@ -113,8 +113,8 @@ const Booking = () => {
         {loadingFlight ? (
           <Loader />
         ) : flight ? (
-          <div className="mt-4 rounded-xl border border-blue-100 bg-blue-50 p-4 text-sm text-slate-700">
-            <p className="font-semibold text-slate-900">
+          <div className="mt-4 rounded-xl border border-blue-100 bg-blue-50 p-4 text-sm text-slate-700 dark:border-sky-900/60 dark:bg-sky-950/40 dark:text-slate-300">
+            <p className="font-semibold text-slate-900 dark:text-slate-100">
               {flight.source} to {flight.destination}
             </p>
             <p>
@@ -134,7 +134,7 @@ const Booking = () => {
             value={formData.seatNumber}
             onChange={onChange}
             required
-            className="w-full rounded-md border border-slate-300 px-4 py-2 outline-none focus:border-blue-500"
+            className="input-tripzy"
           />
           <input
             type="date"
@@ -142,7 +142,7 @@ const Booking = () => {
             value={formData.travelDate}
             onChange={onChange}
             required
-            className="w-full rounded-md border border-slate-300 px-4 py-2 outline-none focus:border-blue-500"
+            className="input-tripzy"
           />
           <input
             type="text"
@@ -151,14 +151,14 @@ const Booking = () => {
             value={formData.passengerName}
             onChange={onChange}
             required
-            className="w-full rounded-md border border-slate-300 px-4 py-2 outline-none focus:border-blue-500"
+            className="input-tripzy"
           />
           <div className="grid gap-4 sm:grid-cols-2">
             <select
               name="passengerGender"
               value={formData.passengerGender}
               onChange={onChange}
-              className="w-full rounded-md border border-slate-300 px-4 py-2 outline-none focus:border-blue-500"
+              className="input-tripzy"
               required
             >
               <option value="male">Male</option>
@@ -173,26 +173,26 @@ const Booking = () => {
               value={formData.passengerAge}
               onChange={onChange}
               required
-              className="w-full rounded-md border border-slate-300 px-4 py-2 outline-none focus:border-blue-500"
+              className="input-tripzy"
             />
           </div>
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full rounded-md bg-blue-600 px-4 py-2 font-medium text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-70"
+            className="w-full rounded-md bg-blue-600 px-4 py-2 font-medium text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-70 dark:bg-sky-600 dark:hover:bg-sky-500"
           >
             {isSubmitting ? "Booking..." : "Confirm Booking"}
           </button>
         </form>
       </div>
 
-      <aside className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-        <h2 className="text-lg font-semibold text-slate-900">Aircraft Seat Map</h2>
-        <p className="mt-1 text-sm text-slate-600">
+      <aside className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-900/80 sm:p-5">
+        <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-100">Aircraft Seat Map</h2>
+        <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
           Click a seat to auto-fill. Left and right blocks are separated by aisle.
         </p>
-        <div className="mt-4 rounded-2xl border border-slate-200 bg-slate-50 p-3">
-          <div className="mx-auto mb-3 w-44 rounded-full bg-slate-200 py-1 text-center text-xs font-semibold text-slate-600">
+        <div className="mt-4 overflow-x-auto rounded-2xl border border-slate-200 bg-slate-50 p-3 dark:border-slate-600 dark:bg-slate-800/50">
+          <div className="mx-auto mb-3 min-w-[11rem] w-44 rounded-full bg-slate-200 py-1 text-center text-xs font-semibold text-slate-600 dark:bg-slate-600 dark:text-slate-200">
             Cockpit
           </div>
           {seatRows.map((row) => (
@@ -213,9 +213,9 @@ const Booking = () => {
                       onClick={() => onSeatSelect(seatCode)}
                       className={`rounded-md border px-1 py-1 text-[10px] font-semibold transition ${
                         isSelected
-                          ? "border-blue-600 bg-blue-600 text-white"
-                          : "border-slate-300 bg-white text-slate-700 hover:border-blue-400 hover:bg-blue-50"
-                      } ${isWindow ? "ring-1 ring-sky-200" : ""}`}
+                          ? "border-blue-600 bg-blue-600 text-white dark:border-sky-500 dark:bg-sky-600"
+                          : "border-slate-300 bg-white text-slate-700 hover:border-blue-400 hover:bg-blue-50 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-200 dark:hover:border-sky-500 dark:hover:bg-slate-700"
+                      } ${isWindow ? "ring-1 ring-sky-200 dark:ring-sky-700" : ""}`}
                     >
                       {seatCode}
                     </button>
@@ -238,9 +238,9 @@ const Booking = () => {
                     onClick={() => onSeatSelect(seatCode)}
                     className={`rounded-md border px-1 py-1 text-[10px] font-semibold transition ${
                       isSelected
-                        ? "border-blue-600 bg-blue-600 text-white"
-                        : "border-slate-300 bg-white text-slate-700 hover:border-blue-400 hover:bg-blue-50"
-                    } ${isWindow ? "ring-1 ring-sky-200" : ""}`}
+                        ? "border-blue-600 bg-blue-600 text-white dark:border-sky-500 dark:bg-sky-600"
+                        : "border-slate-300 bg-white text-slate-700 hover:border-blue-400 hover:bg-blue-50 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-200 dark:hover:border-sky-500 dark:hover:bg-slate-700"
+                    } ${isWindow ? "ring-1 ring-sky-200 dark:ring-sky-700" : ""}`}
                   >
                     {seatCode}
                   </button>
@@ -249,14 +249,14 @@ const Booking = () => {
               </div>
             </div>
           ))}
-          <div className="mt-3 grid grid-cols-3 gap-2 text-[11px]">
-            <div className="rounded-md bg-white p-2 text-slate-600">
+          <div className="mt-3 grid min-w-[min(100%,18rem)] grid-cols-3 gap-2 text-[11px]">
+            <div className="rounded-md bg-white p-2 text-slate-600 dark:bg-slate-800 dark:text-slate-300">
               <span className="inline-block h-2 w-2 rounded-full bg-blue-600" /> Selected
             </div>
-            <div className="rounded-md bg-white p-2 text-slate-600">
+            <div className="rounded-md bg-white p-2 text-slate-600 dark:bg-slate-800 dark:text-slate-300">
               <span className="inline-block h-2 w-2 rounded-full bg-slate-300" /> Standard
             </div>
-            <div className="rounded-md bg-white p-2 text-slate-600">
+            <div className="rounded-md bg-white p-2 text-slate-600 dark:bg-slate-800 dark:text-slate-300">
               <span className="inline-block h-2 w-2 rounded-full bg-sky-300" /> Window edge
             </div>
           </div>

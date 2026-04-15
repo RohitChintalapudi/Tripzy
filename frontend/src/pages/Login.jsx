@@ -62,9 +62,9 @@ const Login = () => {
   }
 
   return (
-    <section className="mx-auto mt-10 max-w-5xl">
-      <div className="grid overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-2xl lg:grid-cols-2">
-        <aside className="relative p-8 text-white">
+    <section className="mx-auto mt-4 max-w-5xl sm:mt-10">
+      <div className="grid overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-2xl dark:border-slate-700 dark:bg-slate-900/80 lg:grid-cols-2">
+        <aside className="relative min-h-[200px] p-6 text-white sm:p-8 lg:min-h-0">
           <img
             src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=80"
             alt="Airplane wing view"
@@ -87,12 +87,12 @@ const Login = () => {
           </div>
         </aside>
 
-        <div className="p-8">
-          <h2 className="text-2xl text-slate-900">Sign In</h2>
-          <p className="mt-1 text-sm text-slate-500">Use your registered email and password.</p>
+        <div className="p-5 sm:p-8">
+          <h2 className="text-2xl text-slate-900 dark:text-slate-100">Sign In</h2>
+          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Use your registered email and password.</p>
           <form className="mt-6 space-y-4" onSubmit={onSubmit}>
             <label className="block space-y-1">
-              <span className="text-xs text-slate-600">Email Address</span>
+              <span className="text-xs text-slate-600 dark:text-slate-400">Email Address</span>
               <input
                 type="email"
                 name="email"
@@ -100,11 +100,11 @@ const Login = () => {
                 value={formData.email}
                 onChange={onChange}
                 required
-                className="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                className="input-tripzy-xl"
               />
             </label>
             <label className="block space-y-1">
-              <span className="text-xs text-slate-600">Password</span>
+              <span className="text-xs text-slate-600 dark:text-slate-400">Password</span>
               <input
                 type="password"
                 name="password"
@@ -112,20 +112,20 @@ const Login = () => {
                 value={formData.password}
                 onChange={onChange}
                 required
-                className="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                className="input-tripzy-xl"
               />
             </label>
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full rounded-xl bg-blue-600 px-4 py-3 text-white shadow transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-70"
+              className="w-full rounded-xl bg-blue-600 px-4 py-3 text-white shadow transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-70 dark:bg-sky-600 dark:hover:bg-sky-500"
             >
               {isSubmitting ? "Signing in..." : "Login"}
             </button>
           </form>
-          <p className="mt-5 text-center text-sm text-slate-600">
+          <p className="mt-5 text-center text-sm text-slate-600 dark:text-slate-400">
             New to Tripzy?{" "}
-            <Link to="/register" className="text-blue-600 hover:underline">
+            <Link to="/register" className="text-blue-600 hover:underline dark:text-sky-400">
               Create account
             </Link>
           </p>

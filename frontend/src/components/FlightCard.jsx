@@ -23,37 +23,41 @@ const FlightCard = ({ flight }) => {
   const departureDateForBooking = formatInputDate(departureDate);
 
   return (
-    <article className="group rounded-2xl border border-slate-200 bg-white p-5 font-bold shadow-md transition duration-200 hover:shadow-xl">
+    <article className="group rounded-2xl border border-slate-200 bg-white p-4 font-bold shadow-md transition duration-200 hover:shadow-xl dark:border-slate-700 dark:bg-slate-900/80 sm:p-5">
       <div className="grid gap-3 md:grid-cols-4 md:items-center">
         <div className="md:col-span-1">
-          <p className="text-sm font-semibold text-slate-900">{flight?.airlineName || "Tripzy Air"}</p>
-          <p className="text-xs text-slate-500">{flightCode}</p>
+          <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">
+            {flight?.airlineName || "Tripzy Air"}
+          </p>
+          <p className="text-xs text-slate-500 dark:text-slate-400">{flightCode}</p>
         </div>
 
         <div className="md:col-span-2">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-wrap items-center justify-between gap-2">
             <div>
-              <p className="text-lg font-bold text-slate-900">{flight?.source}</p>
-              <p className="text-xs text-slate-500">{formatDate(departureDate)}</p>
+              <p className="text-lg font-bold text-slate-900 dark:text-slate-100">{flight?.source}</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400">{formatDate(departureDate)}</p>
             </div>
-            <div className="mx-4 flex-1 border-t border-dashed border-slate-300" />
+            <div className="mx-2 min-w-[2rem] flex-1 border-t border-dashed border-slate-300 dark:border-slate-600" />
             <div className="text-right">
-              <p className="text-lg font-bold text-slate-900">{flight?.destination}</p>
-              <p className="text-xs text-slate-500">{formatDate(arrivalDate)}</p>
+              <p className="text-lg font-bold text-slate-900 dark:text-slate-100">{flight?.destination}</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400">{formatDate(arrivalDate)}</p>
             </div>
           </div>
         </div>
 
         <div className="md:col-span-1 md:text-right">
-          <p className="text-2xl font-extrabold text-blue-600">₹{flight?.price ?? "N/A"}</p>
-          <p className="mt-1 text-xs text-slate-500">Seats left: {flight?.seatsAvailable ?? "N/A"}</p>
+          <p className="text-2xl font-extrabold text-blue-600 dark:text-sky-400">₹{flight?.price ?? "N/A"}</p>
+          <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+            Seats left: {flight?.seatsAvailable ?? "N/A"}
+          </p>
         </div>
       </div>
-      <div className="mt-4 flex items-center justify-between border-t border-slate-100 pt-4">
-        <p className="text-xs text-slate-500">Free meal + cabin baggage</p>
+      <div className="mt-4 flex flex-col gap-3 border-t border-slate-100 pt-4 sm:flex-row sm:items-center sm:justify-between dark:border-slate-700">
+        <p className="text-xs text-slate-500 dark:text-slate-400">Free meal + cabin baggage</p>
         <Link
           to={`/book?flightId=${flight?._id}&travelDate=${departureDateForBooking}`}
-          className="inline-flex rounded-lg bg-blue-600 px-5 py-2 text-sm font-semibold text-white transition group-hover:bg-blue-700"
+          className="inline-flex justify-center rounded-lg bg-blue-600 px-5 py-2 text-sm font-semibold text-white transition group-hover:bg-blue-700 dark:bg-sky-600 dark:hover:bg-sky-500"
         >
           View Fares
         </Link>

@@ -45,7 +45,7 @@ const MyBookings = () => {
 
   return (
     <section className="space-y-5">
-      <div className="relative overflow-hidden rounded-3xl px-6 py-8 text-white shadow-xl">
+      <div className="relative overflow-hidden rounded-3xl px-4 py-6 text-white shadow-xl sm:px-6 sm:py-8">
         <img
           src="https://images.unsplash.com/photo-1540339832862-474599807836?auto=format&fit=crop&w=1600&q=80"
           alt="Flight boarding gate"
@@ -60,7 +60,7 @@ const MyBookings = () => {
         </div>
       </div>
       {bookings.length === 0 ? (
-        <p className="rounded-lg border border-slate-200 bg-white p-6 text-center text-slate-600">
+        <p className="rounded-lg border border-slate-200 bg-white p-6 text-center text-slate-600 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-300">
           No bookings found.
         </p>
       ) : (
@@ -68,7 +68,7 @@ const MyBookings = () => {
           {bookings.map((booking) => (
             <article
               key={booking._id}
-              className="overflow-hidden rounded-2xl border border-slate-200 bg-white font-bold shadow-md"
+              className="overflow-hidden rounded-2xl border border-slate-200 bg-white font-bold shadow-md dark:border-slate-700 dark:bg-slate-900/80"
             >
               <div className="bg-gradient-to-r from-sky-600 to-blue-700 px-5 py-4 text-white">
                 <div className="flex flex-wrap items-center justify-between gap-2">
@@ -87,21 +87,21 @@ const MyBookings = () => {
 
               <div className="grid gap-4 p-5 md:grid-cols-[1fr_auto_1fr] md:items-center">
                 <div>
-                  <p className="text-xs uppercase tracking-wider text-slate-500">From</p>
-                  <p className="text-lg font-semibold text-slate-900">
+                  <p className="text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400">From</p>
+                  <p className="text-lg font-semibold text-slate-900 dark:text-slate-100">
                     {booking.flightId?.source || "N/A"}
                   </p>
                 </div>
-                <div className="hidden h-px w-20 border-t border-dashed border-slate-300 md:block" />
+                <div className="hidden h-px w-20 border-t border-dashed border-slate-300 dark:border-slate-600 md:block" />
                 <div className="md:text-right">
-                  <p className="text-xs uppercase tracking-wider text-slate-500">To</p>
-                  <p className="text-lg font-semibold text-slate-900">
+                  <p className="text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400">To</p>
+                  <p className="text-lg font-semibold text-slate-900 dark:text-slate-100">
                     {booking.flightId?.destination || "N/A"}
                   </p>
                 </div>
               </div>
 
-              <div className="grid gap-3 border-t border-dashed border-slate-200 px-5 py-4 text-sm text-slate-700 sm:grid-cols-2 lg:grid-cols-4">
+              <div className="grid gap-3 border-t border-dashed border-slate-200 px-5 py-4 text-sm text-slate-700 dark:border-slate-700 dark:text-slate-300 sm:grid-cols-2 lg:grid-cols-4">
                 <p>
                   <span className="font-medium">Seat:</span> {booking.seatNumber || "N/A"}
                 </p>

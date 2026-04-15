@@ -34,7 +34,7 @@ const values = [
 const About = () => {
   return (
     <section className="mx-auto max-w-5xl space-y-8">
-      <div className="relative overflow-hidden rounded-2xl px-6 py-5 text-white shadow-xl">
+      <div className="relative overflow-hidden rounded-2xl px-4 py-5 text-white shadow-xl sm:px-6">
         <img
           src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1600&q=80"
           alt="Flight in sky"
@@ -51,29 +51,29 @@ const About = () => {
       </div>
 
       <div className="grid gap-5 md:grid-cols-2">
-        <article className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-md transition duration-300 hover:-translate-y-2 hover:shadow-2xl">
+        <article className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-md transition duration-300 hover:-translate-y-2 hover:shadow-2xl dark:border-slate-700 dark:bg-slate-900/80">
           <img
             src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=80"
             alt="Airplane flying in sky"
             className="h-56 w-full object-cover"
           />
           <div className="p-5">
-            <h2 className="text-lg font-semibold text-slate-900">Built for Every Flyer</h2>
-            <p className="mt-2 text-sm text-slate-600">
+            <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-100">Built for Every Flyer</h2>
+            <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
               From weekend trips to business travel, Tripzy keeps booking simple,
               quick, and intuitive for all user types.
             </p>
           </div>
         </article>
-        <article className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-md transition duration-300 hover:-translate-y-2 hover:shadow-2xl">
+        <article className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-md transition duration-300 hover:-translate-y-2 hover:shadow-2xl dark:border-slate-700 dark:bg-slate-900/80">
           <img
             src="https://images.unsplash.com/photo-1542296332-2e4473faf563?auto=format&fit=crop&w=1200&q=80"
             alt="Airport runway and lights"
             className="h-56 w-full object-cover"
           />
           <div className="p-5">
-            <h2 className="text-lg font-semibold text-slate-900">Fast and Reliable</h2>
-            <p className="mt-2 text-sm text-slate-600">
+            <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-100">Fast and Reliable</h2>
+            <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
               We optimize each step of search, booking, and management so you can
               move from planning to confirmation in minutes.
             </p>
@@ -85,10 +85,10 @@ const About = () => {
         {features.map((item) => (
           <article
             key={item.title}
-            className="rounded-2xl border border-slate-200 bg-white p-5 shadow-md transition duration-300 hover:-translate-y-2 hover:shadow-2xl"
+            className="rounded-2xl border border-slate-200 bg-white p-5 shadow-md transition duration-300 hover:-translate-y-2 hover:shadow-2xl dark:border-slate-700 dark:bg-slate-900/80"
           >
-            <h2 className="text-lg font-semibold text-slate-900">{item.title}</h2>
-            <p className="mt-2 text-sm text-slate-600">{item.description}</p>
+            <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-100">{item.title}</h2>
+            <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">{item.description}</p>
           </article>
         ))}
       </div>
@@ -97,10 +97,10 @@ const About = () => {
         {values.map((item) => (
           <article
             key={item.title}
-            className="rounded-2xl border border-slate-200 bg-slate-50 p-5 shadow-sm transition duration-300 hover:-translate-y-2 hover:shadow-2xl"
+            className="rounded-2xl border border-slate-200 bg-slate-50 p-5 shadow-sm transition duration-300 hover:-translate-y-2 hover:shadow-2xl dark:border-slate-700 dark:bg-slate-800/60"
           >
-            <h3 className="text-base font-semibold text-slate-900">{item.title}</h3>
-            <p className="mt-2 text-sm text-slate-600">{item.text}</p>
+            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-100">{item.title}</h3>
+            <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">{item.text}</p>
           </article>
         ))}
       </div>
