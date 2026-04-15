@@ -4,6 +4,8 @@ import { toast } from "react-toastify";
 import API from "../services/api.js";
 import { useAuth } from "../context/useAuth.jsx";
 
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 const Register = () => {
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
@@ -17,9 +19,30 @@ const Register = () => {
 
   const onSubmit = async (event) => {
     event.preventDefault();
+    const name = formData.name.trim();
+    const email = formData.email.trim().toLowerCase();
+    const password = formData.password;
+
+    if (!name || !email || !password) {
+      toast.error("Name, email and password are required");
+      return;
+    }
+    if (name.length < 2 || name.length > 50) {
+      toast.error("Name must be between 2 and 50 characters");
+      return;
+    }
+    if (!emailRegex.test(email)) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+    if (password.length < 6) {
+      toast.error("Password must be at least 6 characters");
+      return;
+    }
+
     setIsSubmitting(true);
     try {
-      await API.post("/auth/register", formData);
+      await API.post("/auth/register", { name, email, password });
       toast.success("Registration successful. Please login.");
       navigate("/login");
     } catch (error) {

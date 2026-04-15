@@ -4,6 +4,8 @@ import { toast } from "react-toastify";
 import API from "../services/api.js";
 import { useAuth } from "../context/useAuth.jsx";
 
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 const Home = () => {
   const navigate = useNavigate();
   const { login, isAuthenticated } = useAuth();
@@ -43,9 +45,25 @@ const Home = () => {
 
   const handleLoginSubmit = async (event) => {
     event.preventDefault();
+    const email = loginData.email.trim().toLowerCase();
+    const password = loginData.password;
+
+    if (!email || !password) {
+      toast.error("Email and password are required");
+      return;
+    }
+    if (!emailRegex.test(email)) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+    if (password.length < 6) {
+      toast.error("Password must be at least 6 characters");
+      return;
+    }
+
     setIsSubmitting(true);
     try {
-      const { data } = await API.post("/auth/login", loginData);
+      const { data } = await API.post("/auth/login", { email, password });
       login({
         token: data.token,
         user: data.user || {
@@ -67,9 +85,30 @@ const Home = () => {
 
   const handleRegisterSubmit = async (event) => {
     event.preventDefault();
+    const name = registerData.name.trim();
+    const email = registerData.email.trim().toLowerCase();
+    const password = registerData.password;
+
+    if (!name || !email || !password) {
+      toast.error("Name, email and password are required");
+      return;
+    }
+    if (name.length < 2 || name.length > 50) {
+      toast.error("Name must be between 2 and 50 characters");
+      return;
+    }
+    if (!emailRegex.test(email)) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+    if (password.length < 6) {
+      toast.error("Password must be at least 6 characters");
+      return;
+    }
+
     setIsSubmitting(true);
     try {
-      await API.post("/auth/register", registerData);
+      await API.post("/auth/register", { name, email, password });
       toast.success("Account created. Please login.");
       setActiveTab("login");
     } catch (error) {
