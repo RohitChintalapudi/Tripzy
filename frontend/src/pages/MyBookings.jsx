@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 import Loader from "../components/Loader.jsx";
 import API from "../services/api.js";
 
@@ -39,6 +41,26 @@ const MyBookings = () => {
     }
   };
 
+  const downloadTicketPDF = async (bookingId) => {
+    const element = document.getElementById(`ticket-${bookingId}`);
+    if (!element) return;
+
+    try {
+      const canvas = await html2canvas(element, { scale: 2 });
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF("p", "mm", "a4");
+
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+      pdf.save(`Ticket-${bookingId}.pdf`);
+      toast.success("Ticket downloaded successfully!");
+    } catch (err) {
+      toast.error("Failed to generate PDF");
+    }
+  };
+
   if (loading) {
     return <Loader />;
   }
@@ -68,6 +90,7 @@ const MyBookings = () => {
           {bookings.map((booking) => (
             <article
               key={booking._id}
+              id={`ticket-${booking._id}`}
               className="overflow-hidden rounded-2xl border border-slate-200 bg-white font-bold shadow-md dark:border-slate-700 dark:bg-slate-900/80"
             >
               <div className="bg-gradient-to-r from-sky-600 to-blue-700 px-5 py-4 text-white">
@@ -130,8 +153,8 @@ const MyBookings = () => {
                 </p>
               </div>
 
-              {booking.status !== "cancelled" && (
-                <div className="px-5 pb-5">
+              <div className="px-5 pb-5 flex flex-wrap gap-3 pt-2" data-html2canvas-ignore="true">
+                {booking.status !== "cancelled" && (
                   <button
                     type="button"
                     onClick={() => cancelBooking(booking._id)}
@@ -139,8 +162,15 @@ const MyBookings = () => {
                   >
                     Cancel Booking
                   </button>
-                </div>
-              )}
+                )}
+                <button
+                  type="button"
+                  onClick={() => downloadTicketPDF(booking._id)}
+                  className="rounded-md bg-sky-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-sky-700"
+                >
+                  Download PDF Ticket
+                </button>
+              </div>
             </article>
           ))}
         </div>
