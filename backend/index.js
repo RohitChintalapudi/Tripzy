@@ -14,7 +14,7 @@ const port = process.env.PORT || 5000;
 
 const allowedOrigins = process.env.CORS_ORIGINS
   ? process.env.CORS_ORIGINS.split(",").map((origin) => origin.trim())
-  : ["http://localhost:5173"];
+  : ["https://tripzy-frontend-sb5l.onrender.com"];
 
 const corsOptions = {
   origin: (origin, callback) => {
