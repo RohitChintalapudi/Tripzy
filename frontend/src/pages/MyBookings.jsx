@@ -52,7 +52,7 @@ const MyBookings = () => {
 
       const imgData = await domtoimage.toPng(element, { 
         quality: 1, 
-        bgcolor: '#ffffff',
+        bgcolor: '#000000',
         filter: filter
       });
       
