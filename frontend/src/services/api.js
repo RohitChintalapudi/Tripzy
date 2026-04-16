@@ -1,7 +1,10 @@
 import axios from "axios";
 
 export const BASE_URL_BACKEND =
-  import.meta.env.VITE_BASE_URL_BACKEND || "https://tripzy-backend-j5t5.onrender.com/api";
+  import.meta.env.VITE_BASE_URL_BACKEND ||
+  (import.meta.env.DEV
+    ? "http://localhost:5000/api"
+    : "https://tripzy-backend-j5t5.onrender.com/api");
 
 const API = axios.create({
   baseURL: BASE_URL_BACKEND,

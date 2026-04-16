@@ -1,5 +1,6 @@
 import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
+import FlightAssistant from "./components/FlightAssistant.jsx";
 import AppRoutes from "./routes/AppRoutes.jsx";
 
 const App = () => {
@@ -10,6 +11,7 @@ const App = () => {
         <AppRoutes />
       </main>
       <Footer />
+      <FlightAssistant />
     </div>
   );
 };
