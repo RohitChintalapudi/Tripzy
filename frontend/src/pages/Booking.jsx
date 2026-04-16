@@ -17,16 +17,18 @@ const Booking = () => {
   const [searchParams] = useSearchParams();
   const flightId = searchParams.get("flightId");
   const prefilledTravelDate = searchParams.get("travelDate") || "";
-
-  const [flight, setFlight] = useState(null);
-  const [loadingFlight, setLoadingFlight] = useState(false);
-  const [formData, setFormData] = useState({
+  const createPassenger = () => ({
     seatNumber: "",
-    travelDate: prefilledTravelDate,
     passengerName: "",
     passengerGender: "male",
     passengerAge: "",
   });
+
+  const [flight, setFlight] = useState(null);
+  const [loadingFlight, setLoadingFlight] = useState(false);
+  const [travelDate, setTravelDate] = useState(prefilledTravelDate);
+  const [passengers, setPassengers] = useState([createPassenger()]);
+  const [activePassengerIndex, setActivePassengerIndex] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const seatRows = useMemo(() => {
@@ -64,13 +66,38 @@ const Booking = () => {
     fetchFlight();
   }, [flightId]);
 
-  const onChange = (event) => {
+  const onPassengerChange = (index, event) => {
     const { name, value } = event.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setPassengers((prev) =>
+      prev.map((passenger, currentIndex) =>
+        currentIndex === index ? { ...passenger, [name]: value } : passenger,
+      ),
+    );
   };
 
   const onSeatSelect = (seatNumber) => {
-    setFormData((prev) => ({ ...prev, seatNumber }));
+    setPassengers((prev) =>
+      prev.map((passenger, currentIndex) =>
+        currentIndex === activePassengerIndex ? { ...passenger, seatNumber } : passenger,
+      ),
+    );
+  };
+
+  const addPassenger = () => {
+    setPassengers((prev) => {
+      setActivePassengerIndex(prev.length);
+      return [...prev, createPassenger()];
+    });
+  };
+
+  const removePassenger = (index) => {
+    if (passengers.length === 1) {
+      toast.error("At least one passenger is required");
+      return;
+    }
+
+    setPassengers((prev) => prev.filter((_, currentIndex) => currentIndex !== index));
+    setActivePassengerIndex((prev) => (prev > 0 && prev >= index ? prev - 1 : prev));
   };
 
   const onSubmit = async (event) => {
@@ -80,15 +107,23 @@ const Booking = () => {
       return;
     }
 
+    const seatNumbers = passengers.map((passenger) => passenger.seatNumber.trim());
+    if (new Set(seatNumbers).size !== seatNumbers.length) {
+      toast.error("Each passenger must have a unique seat number");
+      return;
+    }
+
     setIsSubmitting(true);
     try {
       await API.post("/bookings", {
         flightId,
-        seatNumber: formData.seatNumber,
-        travelDate: formData.travelDate,
-        passengerName: formData.passengerName,
-        passengerGender: formData.passengerGender,
-        passengerAge: Number(formData.passengerAge),
+        travelDate,
+        passengers: passengers.map((passenger) => ({
+          seatNumber: passenger.seatNumber,
+          passengerName: passenger.passengerName,
+          passengerGender: passenger.passengerGender,
+          passengerAge: Number(passenger.passengerAge),
+        })),
       });
       toast.success("Booking created successfully");
       navigate("/my-bookings");
@@ -128,54 +163,90 @@ const Booking = () => {
 
         <form className="mt-6 space-y-4" onSubmit={onSubmit}>
           <input
-            type="text"
-            name="seatNumber"
-            placeholder="Seat Number (e.g. 3C)"
-            value={formData.seatNumber}
-            onChange={onChange}
-            required
-            className="input-tripzy"
-          />
-          <input
             type="date"
-            name="travelDate"
-            value={formData.travelDate}
-            onChange={onChange}
+            value={travelDate}
+            onChange={(event) => setTravelDate(event.target.value)}
             required
             className="input-tripzy"
           />
-          <input
-            type="text"
-            name="passengerName"
-            placeholder="Passenger Name"
-            value={formData.passengerName}
-            onChange={onChange}
-            required
-            className="input-tripzy"
-          />
-          <div className="grid gap-4 sm:grid-cols-2">
-            <select
-              name="passengerGender"
-              value={formData.passengerGender}
-              onChange={onChange}
-              className="input-tripzy"
-              required
+          {passengers.map((passenger, index) => (
+            <div
+              key={`passenger-${index + 1}`}
+              className={`space-y-3 rounded-xl border p-3 ${
+                activePassengerIndex === index
+                  ? "border-blue-300 bg-blue-50/40 dark:border-sky-700 dark:bg-sky-950/20"
+                  : "border-slate-200 dark:border-slate-700"
+              }`}
             >
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-              <option value="other">Other</option>
-            </select>
-            <input
-              type="number"
-              min="1"
-              name="passengerAge"
-              placeholder="Passenger Age"
-              value={formData.passengerAge}
-              onChange={onChange}
-              required
-              className="input-tripzy"
-            />
-          </div>
+              <div className="flex items-center justify-between gap-3">
+                <button
+                  type="button"
+                  onClick={() => setActivePassengerIndex(index)}
+                  className="text-sm font-semibold text-slate-800 dark:text-slate-100"
+                >
+                  Passenger {index + 1}
+                  {activePassengerIndex === index ? " (Seat selection active)" : ""}
+                </button>
+                {passengers.length > 1 && (
+                  <button
+                    type="button"
+                    onClick={() => removePassenger(index)}
+                    className="text-xs font-medium text-rose-600 hover:text-rose-700 dark:text-rose-400 dark:hover:text-rose-300"
+                  >
+                    Remove
+                  </button>
+                )}
+              </div>
+              <input
+                type="text"
+                name="seatNumber"
+                placeholder="Seat Number (e.g. 3C)"
+                value={passenger.seatNumber}
+                onChange={(event) => onPassengerChange(index, event)}
+                required
+                className="input-tripzy"
+              />
+              <input
+                type="text"
+                name="passengerName"
+                placeholder="Passenger Name"
+                value={passenger.passengerName}
+                onChange={(event) => onPassengerChange(index, event)}
+                required
+                className="input-tripzy"
+              />
+              <div className="grid gap-4 sm:grid-cols-2">
+                <select
+                  name="passengerGender"
+                  value={passenger.passengerGender}
+                  onChange={(event) => onPassengerChange(index, event)}
+                  className="input-tripzy"
+                  required
+                >
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other</option>
+                </select>
+                <input
+                  type="number"
+                  min="1"
+                  name="passengerAge"
+                  placeholder="Passenger Age"
+                  value={passenger.passengerAge}
+                  onChange={(event) => onPassengerChange(index, event)}
+                  required
+                  className="input-tripzy"
+                />
+              </div>
+            </div>
+          ))}
+          <button
+            type="button"
+            onClick={addPassenger}
+            className="w-full rounded-md border border-dashed border-blue-400 px-4 py-2 text-sm font-medium text-blue-700 transition hover:bg-blue-50 dark:border-sky-500 dark:text-sky-300 dark:hover:bg-sky-900/30"
+          >
+            Add Another Passenger
+          </button>
           <button
             type="submit"
             disabled={isSubmitting}
@@ -204,7 +275,7 @@ const Booking = () => {
                   if (!availableSeats.has(seatCode)) {
                     return <div key={seatCode} className="h-6 rounded-md bg-transparent" />;
                   }
-                  const isSelected = formData.seatNumber === seatCode;
+                  const isSelected = passengers[activePassengerIndex]?.seatNumber === seatCode;
                   const isWindow = column === "A";
                   return (
                     <button
@@ -229,7 +300,7 @@ const Booking = () => {
                 if (!availableSeats.has(seatCode)) {
                   return <div key={seatCode} className="h-6 rounded-md bg-transparent" />;
                 }
-                const isSelected = formData.seatNumber === seatCode;
+                const isSelected = passengers[activePassengerIndex]?.seatNumber === seatCode;
                 const isWindow = column === "F";
                 return (
                   <button
