@@ -157,7 +157,7 @@ const Flights = () => {
               : "Format shown to users: dd/mm/yyyy"}
           </span>
         </label>
-        <div className="flex items-end">
+        <div className="flex h-full min-h-0 items-center">
           <button
             type="submit"
             className="w-full rounded-xl bg-blue-600 px-4 py-3 text-sm font-semibold text-white shadow transition hover:bg-blue-700 sm:text-base dark:bg-sky-600 dark:hover:bg-sky-500"
