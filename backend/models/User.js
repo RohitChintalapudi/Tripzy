@@ -29,6 +29,16 @@ const userSchema = new mongoose.Schema(
       enum: ["user", "admin"],
       default: "user",
     },
+    phone: {
+      type: String,
+      trim: true,
+      maxlength: [20, "Phone number must be at most 20 characters"],
+    },
+    city: {
+      type: String,
+      trim: true,
+      maxlength: [80, "City must be at most 80 characters"],
+    },
   },
   { timestamps: true },
 );

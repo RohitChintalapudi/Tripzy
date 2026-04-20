@@ -19,7 +19,6 @@ const allowedOrigins = process.env.CORS_ORIGINS
 
 const corsOptions = {
   origin: (origin, callback) => {
-    // Allow requests without origin (like Postman/server-to-server).
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
       return;
@@ -45,6 +44,7 @@ await connectDB();
 app.get("/",(req,res)=>{
     res.send("API is running...");
 })
+
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 })
