@@ -165,7 +165,18 @@ const MyBookings = () => {
                 </p>
               </div>
 
-              <div className="px-5 pb-5 flex flex-wrap gap-3 pt-2" data-html2canvas-ignore="true">
+              <div className="border-t border-solid border-slate-200 bg-slate-50 px-5 py-4 dark:border-slate-700 dark:bg-slate-800/50">
+                <h3 className="mb-2 text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-slate-100">Terms & Safety Precautions</h3>
+                <ul className="list-inside list-disc space-y-1 text-xs font-normal text-slate-600 dark:text-slate-400 sm:text-[11px]">
+                  <li>Please carry a valid government-issued photo ID along with this e-ticket.</li>
+                  <li>Check-in counters close 45 minutes prior to the scheduled departure time.</li>
+                  <li>Passengers are advised to arrive at the airport at least 2 hours before departure.</li>
+                  <li>Dangerous goods such as flammables, explosives, and corrosives are strictly prohibited.</li>
+                  <li>Ticket modifications or cancellations are subject to the airline's fare rules.</li>
+                </ul>
+              </div>
+
+              <div className="px-5 pb-5 flex flex-wrap gap-3 pt-4" data-html2canvas-ignore="true">
                 {booking.status !== "cancelled" && (
                   <button
                     type="button"
