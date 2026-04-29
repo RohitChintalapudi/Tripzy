@@ -1,4 +1,4 @@
-# Flight Booking System
+<img width="1891" height="891" alt="image" src="https://github.com/user-attachments/assets/f1720787-6a30-46b8-bc2d-f8c0300102ec" /><img width="1891" height="891" alt="image" src="https://github.com/user-attachments/assets/f9fc0b07-b9d0-494f-bd93-e3879e064aab" /># Flight Booking System
 
 A full-stack flight booking web application with user authentication, flight search, booking management, and admin flight controls.
 
@@ -159,16 +159,22 @@ Production Base URL: `https://tripzy-backend-j5t5.onrender.com/api`
 - `/admin/edit-flight/:id` Admin edit flight form
 
 ## Dashboard Screenshot
+<img width="1888" height="886" alt="image" src="https://github.com/user-attachments/assets/5c1ddc6d-7950-46e5-9357-31eccde909a4" />
 
-Add your dashboard screenshot image in the project root (or an `assets` folder), then update the path below if needed:
+## Flights and Booking Screenshot
+<img width="1891" height="891" alt="image" src="https://github.com/user-attachments/assets/5b96ef00-bfbc-4f80-9d83-734b716bc35b" />
 
-```md
-![Admin Dashboard](./assets/dashboard-screenshot.png)
-```
+<img width="1892" height="877" alt="image" src="https://github.com/user-attachments/assets/778a342c-6ae7-43c2-9126-9815dd0c633e" />
 
-Placeholder preview:
+<img width="1892" height="767" alt="image" src="https://github.com/user-attachments/assets/bcd14348-d05c-47dc-be86-998078064e66" />
 
-![Dashboard Screenshot Placeholder](https://via.placeholder.com/1200x675?text=Admin+Dashboard+Screenshot)
+## Admin dashboard Screenshot
+<img width="1883" height="887" alt="image" src="https://github.com/user-attachments/assets/c6cc0a1a-3050-408c-9bd5-60bc981c39ff" />
+
+<img width="1890" height="887" alt="image" src="https://github.com/user-attachments/assets/59d4f430-faab-4689-aa18-519ca50cc063" />
+
+<img width="1895" height="897" alt="image" src="https://github.com/user-attachments/assets/065f3e13-2da8-4d3b-a41b-460300053181" />
+
 
 ## Admin Access
 
