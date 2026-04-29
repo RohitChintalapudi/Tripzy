@@ -1,4 +1,4 @@
-<img width="1891" height="891" alt="image" src="https://github.com/user-attachments/assets/f1720787-6a30-46b8-bc2d-f8c0300102ec" /><img width="1891" height="891" alt="image" src="https://github.com/user-attachments/assets/f9fc0b07-b9d0-494f-bd93-e3879e064aab" /># Flight Booking System
+# Flight Booking System
 
 A full-stack flight booking web application with user authentication, flight search, booking management, and admin flight controls.
 
